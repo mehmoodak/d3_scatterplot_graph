@@ -1,0 +1,14 @@
+body {
+  background-color: #000;
+  text-align: center;
+}
+
+circle {
+  stroke: black;
+  stroke-width: 2px;
+  fill: #1F77B4;
+}
+
+circle.doping {
+  fill: #FF7F0E;
+}
