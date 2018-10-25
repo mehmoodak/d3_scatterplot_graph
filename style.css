@@ -1,5 +1,5 @@
 body {
-  background-color: #000;
+  background-color: #222;
   text-align: center;
   font-family: sans-serif;
 }
@@ -46,4 +46,11 @@ text {
   text-anchor: middle;
   font-size: 18px;
   transform: translate(500px, 70px);
+}
+
+#x-axis path,
+#x-axis line,
+#y-axis path,
+#y-axis line {
+  stroke: white;
 }
