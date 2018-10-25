@@ -1,14 +1,49 @@
 body {
   background-color: #000;
   text-align: center;
+  font-family: sans-serif;
 }
 
-circle {
+circle.dot, #legend rect {
   stroke: black;
   stroke-width: 2px;
   fill: #1F77B4;
 }
 
-circle.doping {
+circle.doping,
+#legend rect.doping {
   fill: #FF7F0E;
+}
+
+#legend rect {
+  transform: translate(950px, 375px);
+}
+
+#legend rect.doping {
+  transform: translate(950px, 400px);
+}
+
+#legend text {
+  font-size: 14px;
+  transform: translate(805px, 388px);
+}
+
+#legend text.doping {
+  transform: translate(753px, 413px);
+}
+
+text {
+  fill: white;
+}
+
+#title {
+  text-anchor: middle;
+  font-size: 30px;
+  transform: translate(500px, 40px);
+}
+
+#subtitle {
+  text-anchor: middle;
+  font-size: 18px;
+  transform: translate(500px, 70px);
 }
