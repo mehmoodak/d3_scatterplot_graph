@@ -4,15 +4,20 @@ body {
   font-family: sans-serif;
 }
 
-circle.dot, #legend rect {
+circle.dot,
+#legend rect {
   stroke: black;
   stroke-width: 2px;
-  fill: #1F77B4;
+  fill: #1f77b4;
+}
+
+.dot:hover {
+  stroke: white;
 }
 
 circle.doping,
 #legend rect.doping {
-  fill: #FF7F0E;
+  fill: #ff7f0e;
 }
 
 #legend rect {
@@ -36,13 +41,13 @@ text {
   fill: white;
 }
 
-#title {
+.title {
   text-anchor: middle;
   font-size: 30px;
   transform: translate(500px, 40px);
 }
 
-#subtitle {
+.subtitle {
   text-anchor: middle;
   font-size: 18px;
   transform: translate(500px, 70px);
@@ -53,4 +58,32 @@ text {
 #y-axis path,
 #y-axis line {
   stroke: white;
+}
+
+#tooltip {
+  display: none;
+  position: absolute;
+  padding: 10px 20px;
+  background-color: #546e7a;
+  border-radius: 5px;
+  color: white;
+  text-align: left;
+  font-size: 14px;
+  transform: translateY(-50%);
+  transition: 0.3s;
+}
+
+#tooltip a,
+#tooltip a:hover {
+  color: white;
+}
+
+#tooltip:before {
+  content: '';
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  top: 50%;
+  left: -10px;
+  transform: translateY(-50%);
 }
