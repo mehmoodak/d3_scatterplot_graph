@@ -18,6 +18,14 @@ let log = () => {
   console.log('options', options);
 };
 
+let logCircle = (type, data, reference) => {
+  console.group(type);
+  console.log(reference);
+  console.log(data);
+  console.log(d3.event);
+  console.groupEnd();
+};
+
 function getDateObj(time) {
   let obj = new Date(0);
   obj.setMinutes(time.split(':')[0]);
@@ -50,6 +58,7 @@ function renderGraph() {
   let legend;
   let xScale;
   let yScale;
+  var tooltip;
 
   svg = d3
     .select('#graph')
@@ -61,12 +70,12 @@ function renderGraph() {
   svg
     .append('text')
     .text('Doping in Professional Bicycle Racing')
-    .attr('id', 'title');
+    .attr('class', 'title');
 
   svg
     .append('text')
     .text("35 Fastest times up Alpe d'Huez")
-    .attr('id', 'subtitle');
+    .attr('class', 'subtitle');
 
   // Appending descriptive text
   legend = svg.append('g').attr('id', 'legend');
@@ -127,8 +136,47 @@ function renderGraph() {
     .attr('cy', d => yScale(getDateObj(d['Time'])))
     .attr('r', options.radius)
     .attr('data-xvalue', d => d['Year'])
-    .attr('data-yvalue', d => getDateObj(d.Time).getMinutes())
+    .attr('data-yvalue', d => getDateObj(d.Time))
+    .attr('data-place', d => d.Place)
     .classed('dot', true)
     .classed('doping', d => d['Doping'])
+    .on('mouseover', function(d, i) {
+      logCircle('Mouse Over', d, this);
+
+      let html = '';
+      d.Name ? (html += `<div><strong>Name: </strong>${d.Name}</div>`) : null;
+      d.Nationality ? (html += `<div><strong>Nationality: </strong>${d.Nationality}</div>`) : null;
+      d.Place ? (html += `<div><strong>Place: </strong>${d.Place}</div>`) : null;
+      d.Time ? (html += `<div><strong>Time: </strong>${d.Time}</div>`) : null;
+      d.URL
+        ? (html += `<div><strong>Source: </strong> <a href="${d.URL}"> View Source </a></div>`)
+        : null;
+      d.Doping ? (html += `<div><strong>Doping: </strong>${d.Doping}</div>`) : null;
+
+      tooltip
+        .html(html)
+        .style('display', 'inline-block')
+        .attr('data-year', d3.select(this).attr('data-xvalue'))
+        .attr('data-place', d.Place)
+        .style('top', d3.event.clientY + 'px')
+        .style('left', d3.event.clientX + 10 + 'px');
+    })
+    .on('mouseout', function(d, i) {
+      logCircle('Mouse Out', d, this);
+      tooltip.style('display', 'none');
+    })
     .exit();
+
+  // Appending tooltip
+  tooltip = d3
+    .select('#graph')
+    .append('div')
+    .attr('id', 'tooltip')
+    .attr('data-year', '')
+    .on('mouseover', function() {
+      d3.select(this).style('display', 'inline-block');
+    })
+    .on('mouseout', function() {
+      d3.select(this).style('display', null);
+    });
 }
