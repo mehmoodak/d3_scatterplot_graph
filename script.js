@@ -175,8 +175,14 @@ function renderGraph() {
     .attr('data-year', '')
     .on('mouseover', function() {
       d3.select(this).style('display', 'inline-block');
+      // Highlight Circle
+      place = document.querySelector("#tooltip").getAttribute('data-place');
+      document.querySelector('circle[data-place="' + place + '"]').style.stroke = "white";
     })
     .on('mouseout', function() {
       d3.select(this).style('display', null);
+      // Remove Highlight Circle
+      place = document.querySelector("#tooltip").getAttribute('data-place');
+      document.querySelector('circle[data-place="'+ place +'"]').style.stroke = null;
     });
 }

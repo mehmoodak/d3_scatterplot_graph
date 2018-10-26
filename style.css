@@ -11,6 +11,10 @@ circle.dot,
   fill: #1f77b4;
 }
 
+.dot:hover {
+  stroke: white;
+}
+
 circle.doping,
 #legend rect.doping {
   fill: #ff7f0e;
